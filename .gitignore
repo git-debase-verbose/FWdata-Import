@@ -1,0 +1,8 @@
+*
+!*/
+!.gitignore
+!converter.py
+!parserFWdata.py
+!launcher.py
+!readme.txt
+!preprocessing/*
