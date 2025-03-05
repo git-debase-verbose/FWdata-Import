@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replacements>
+    <!-- complex replacements with context -->
+        
+        <item in='^nʲiʔ$' next='^-xɔzɔ$' out='nʼi' next-out='-zo' tier='mb' action='change'/>
+        <item in='^nʲiʔ$' next='^-xɔne$' out='nʼi' next-out='-ne' tier='mb' action='change'/>
+        <item in='^irɔʔ$' next='^-xɔne$' out='iro' next-out='-ne' tier='mb' action='change'/>
+        <item in='^miʔ$' next='^-xɔne$' out='mi' next-out='-ne' tier='mb' action='change'/>
+    
+</replacements>    
+

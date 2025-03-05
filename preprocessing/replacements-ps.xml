@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replacements>
+    <!-- ps -->
+    <item in="\*\*\*" out="%%" tier="ps" comment="POS for unanalyzed morphs, should be treated as unknown ('any')"></item>
+    
+    <item in='asp-act' out='v&gt;v' tier='ps' comment='Иногда и n > v, но во флексе тогда разные значения, здесь это не отразишь'/>
+    <item in='case-num' out='n:case' tier='ps'/>
+    <item in='^pers$' out='v:pn' tier='ps'/>
+    <item in='pron-pers' out='pers' tier='ps'/><!-- contains "pers" -->
+    <item in='poss-case' out='n:poss' tier='ps'/>
+    <item in='mpers' out='v:ins' tier='ps'/><!-- contains "pers" -->
+
+    <item in='postf' out='interj' tier='ps' comment='тут некоторая помойка, привязал хоть по чему-нибудь'/>
+    <item in='postp' out='post' tier='ps'/>
+    <item in='pronadv' out='adv' tier='ps'/>
+    <item in='pronadj' out='pro' tier='ps' comment='Классификации местоимений совершенно ортогональны, поэтому привязываю хоть как-то'/>
+    <item in='pronn' out='pro' tier='ps'/>
+
+    <item in='adjs' out='n&gt;adj' tier='ps' comment='Иногда на самом деле не от существительного, но как приближение сойдет'/>
+    <item in='advs' out='n&gt;adv' tier='ps' comment='Иногда на самом деле не от существительного, но как приближение сойдет'/>
+    <item in='nder' out='n&gt;n' tier='ps' comment='на самом деле не от разных частей речи, но как приближение сойдет'/>
+    
+    <item in='mood' out='v:mood' tier='ps'/>
+    <item in='nfin' out='v:nfin' tier='ps' comment='На самом деле бОльшая часть этих случаев во флексе идет как деривация, но v: разное, лучше пусть будет так'/>
+    <item in='quasicase' out='n:case' tier='ps' comment='Это единственный вход, но со сложной алломорфией, кто его знает, везде ли привяжется куда надо'/>
+</replacements>    
+

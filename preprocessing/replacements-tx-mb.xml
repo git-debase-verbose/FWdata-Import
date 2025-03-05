@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replacements>
+    <!-- IPA characters; zero -->
+    <item in="ʲ" out="ʼ"   tier="tx,mb"/> 
+    <item in="tʃ" out="č"  tier="tx,mb"/> 
+    <item in="ʃ" out="š"   tier="tx,mb"/>
+    <item in="ɡ" out="g"   tier="tx,mb"/>
+    <item in="ʒ" out="ž"   tier="tx,mb"/>
+    <item in="ts" out="c"  tier="tx,mb"/>
+    <item in="Ø" out=""    tier="tx"/><!-- zero is deleted -->
+    <item in="Ø" out="^0"  tier="mb"/><!-- zero to FLEx zero '^0' -->
+    
+    <item in="^&lt;\.{2,4}&gt;$" out="..." tier="tx" comment="replace three dots between angle brackets with just three dots"/>
+    <item in="^(\.){2,4}$" out="..." tier="tx" comment="regularize sequences of two to four dots into three dots"/>
+    <item in="^\*(\.){2,4}$" out="%%"  tier="mb" comment="unanalyzed morphs consisting only of * plus two to four dots"/>
+    <item in="^\*$" out="%%"  tier="mb" comment="unanalyzed morphs *** "/>
+    <item in="^([^\*\.]+)\.{2,4}$" out="($1-)"  tier="tx" comment="unanalyzed fragments ending with 2-4 dots"/>
+    <item in="^\*([^\*\.]+)\.{2,4}$" out="%%"  tier="mb" comment="unanalyzed fragments ending with 2-4 dots"/>
+    <item in="^\*([^\*])" out="$1"  tier="mb" comment="unanalyzed morphs starting with * "/>
+    
+    <item in="nʼʔ" out="nʼiʔ" tier="tx,mb" />
+    
+    <!-- words -->
+    <!-- no word replacements for TE -->
+</replacements>    
+
