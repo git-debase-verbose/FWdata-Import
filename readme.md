@@ -47,7 +47,7 @@ Read more in the [(Riaposov et al. 2025)](papers/riaposov_et_al-2025-IGT_import_
         
 * Put all your *.flextext* IGTs into one folder (nested subfolders are possible).          
     
-* Run *launcher.py* ![launcher.py dialog](Flextext2FLEx.png)
+* Run *launcher.py* - ![launcher.py dialog](img/Flextext2FLEx.png)
     * Enter writing system codes (`Target language` = *Vernacular*, `Glossing` & `Alternative glossing` = *Analysis*)
     * Select the FLEx project file (*.fwdata*) (`FLEx Database`)
     * Select the folder containing the IGTs (`Path to flextext`). 
