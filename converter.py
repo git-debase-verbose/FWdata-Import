@@ -319,12 +319,24 @@ class Converter:
                 # Then it's a derivational affix
 
                 affs = affMsa.split(">")
+                
+                fromPosNotFound, toPosNotFound = False, False
 
                 for i in self.posData:
                     if i["pos"] == affs[0]:
                         fromGuid = i["id"]
+                        fromPosNotFound = True
                     if i["pos"] == affs[1]:
                         toGuid = i["id"]
+                        toPosNotFound = True
+                        
+                if fromPosNotFound:
+                    self.main_window.pos_not_found_error(affs[0])
+                    print(f'{affs[0]} is not found in the database. Add it to the database and try again.')
+                    
+                if toPosNotFound:
+                    self.main_window.pos_not_found_error(affs[1])
+                    print(f'{affs[1]} is not found in the database. Add it to the database and try again.')
 
                 moDerivAfflMsaRt = ET.Element("rt", attrib={"class": "MoDerivAffMsa", "guid": msa, "ownerguid": guid})
 
@@ -775,7 +787,7 @@ class Converter:
 
         filelist = self.getFilenames(self, path)
         for f in filelist:
-            nextfile = "Now parsing\n" + f.name
+            nextfile = "Now converting\n" + f.name
             print(nextfile)
 
             if num_files <= 100:

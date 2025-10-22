@@ -1,10 +1,11 @@
 *
 !*/
 !.gitignore
-!converter.py
-!parserFWdata.py
-!launcher.py
-!readme.md
+!*.py
+!*.md
+!*.pdf
+!*.png
+!*.html
+!*.xml
+!*.xsl
 !preprocessing/*
-!papers/riaposov_et_al-2025-IGT_import_FLEx.pdf
-!img/*

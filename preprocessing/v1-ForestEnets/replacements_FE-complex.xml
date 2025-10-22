@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replacements>
+    <!-- complex replacements with context -->
+    <replacements>
+        <item in='^-no$' next='^-ju$' out='-nojuʔ' tier='mb' action='merge'/>
+        <item in='^-ADV$' next='^-RESTR\.ADJ$' out='-ADV' tier='ge,gr'/>
+        <item in='^ɔbu$' next='^-iʃ$' out='ɔbuʃ' tier='mb' action='merge'/>
+        <item in='^what$' next='^-TRANSL$' out='why' tier='ge'/>
+        <item in='^что$' next='^-TRANSL$' out='почему' tier='gr'/>
+
+        <item in='^miʔ$' next='^-xon$' out='mi' next-out='-n' tier='mb' action='change'/>
+        <item in='^miʔ$' next='^-xoz$' out='mi' next-out='-z' tier='mb' action='change'/>
+        <item in='^nʲiʔ$' next='^-xoz$' out='ni' next-out='-z' tier='mb' action='change'/>
+        <item in='^piro$' next='^-xon$' out='piro' next-out='-n' tier='mb' action='change'/>
+        <item in='^piro$' next='^-xoz$' out='piro' next-out='-z' tier='mb' action='change'/>
+        <item in='^taxa$' next='^-xon$' out='taxa' next-out='-n' tier='mb' action='change'/>
+        <item in='^taxa$' next='^-xoz$' out='taxa' next-out='-z' tier='mb' action='change'/>
+        <item in='^tɔʃe$' next='^-xon$' out='tɔʃi' next-out='-n' tier='mb' action='change'/>
+        <item in='^tɔʃe$' next='^-xoz$' out='tɔʃi' next-out='-z' tier='mb' action='change'/>
+        <item in='^bɔdu$' next='^-xon$' out='badu' next-out='-n' tier='mb' action='change'/>
+        <item in='^bɔdu$' next='^-xoz$' out='badu' next-out='-z' tier='mb' action='change'/>
+        <item in='^bɔdu$' next='^-d$' out='badu' next-out='-ʔ' tier='mb' action='change'/>
+        <item in='^ɛke$' next='^-xon$' out='ɛko' next-out='-n' tier='mb' action='change'/>
+        <item in='^ɛke$' next='^-xoz$' out='ɛko' next-out='-z' tier='mb' action='change'/>
+        <item in='^tʃike$' next='^-xon$' out='tʃiko' next-out='-n' tier='mb' action='change'/>
+        <item in='^tʃike$' next='^-xoz$' out='tʃiko' next-out='-z' tier='mb' action='change'/>
+        <item in='^toni$' next='^-xon$' out='tɔni' next-out='-n' tier='mb' action='change'/>
+        <item in='^toni$' next='^-xoz$' out='tɔni' next-out='-z' tier='mb' action='change'/>
+        
+        <item in='^into$' next='^-LOC\.SG$' out='inside' next-out='-LOC.ADV' tier='ge' action='change' comment='miʔ'/>
+        <item in='^into$' next='^-ABL\.SG$' out='inside' next-out='-ABL.ADV' tier='ge' action='change' comment='miʔ'/>
+        <item in='^on\(dir\)$' next='^-ABL\.SG$' out='on' next-out='-ABL.ADV' tier='ge' action='change' comment='n’iʔ'/>
+        <item in='^extent$' next='^-LOC\.SG$' out='until' next-out='-LOC.ADV' tier='ge' action='change' comment='piro'/>
+        <item in='^extent$' next='^-ABL\.SG$' out='until' next-out='-ABL.ADV' tier='ge' action='change' comment='piro'/>
+        <item in='^behind$' next='^-LOC\.SG$' out='behind' next-out='-LOC.ADV' tier='ge' action='change' comment='taxa'/>
+        <item in='^behind$' next='^-ABL\.SG$' out='behind' next-out='-ABL.ADV' tier='ge' action='change' comment='taxa'/>
+        <item in='^lower_part$' next='^-LOC\.SG$' out='down' next-out='-LOC.ADV' tier='ge' action='change' comment='tɔʃe'/>
+        <item in='^lower_part$' next='^-ABL\.SG$' out='down' next-out='-ABL.ADV' tier='ge' action='change' comment='tɔʃe'/>
+        <item in='^tundra$' next='^-LOC\.SG$' out='tundra' next-out='-LOC.ADV' tier='ge' action='change' comment='bɔdu'/>
+        <item in='^tundra$' next='^-ABL\.SG$' out='tundra' next-out='-ABL.ADV' tier='ge' action='change' comment='bɔdu'/>
+        <item in='^tundra$' next='^-DAT\.SG$' out='tundra' next-out='-LAT.ADV' tier='ge' action='change' comment='bɔdu'/>
+        <item in='^this$' next='^-LOC\.SG$' out='this' next-out='-LOC.ADV' tier='ge' action='change' comment='ɛke,tʃike'/>
+        <item in='^this$' next='^-ABL\.SG$' out='this' next-out='-ABL.ADV' tier='ge' action='change' comment='ɛke,tʃike'/>
+        <item in='^there\(dir\)$' next='^-LOC\.SG$' out='there' next-out='-LOC.ADV' tier='ge' action='change' comment='toni'/>
+        <item in='^there\(dir\)$' next='^-ABL\.SG$' out='there' next-out='-ABL.ADV' tier='ge' action='change' comment='toni'/>
+        
+    </replacements>
+</replacements>    
+

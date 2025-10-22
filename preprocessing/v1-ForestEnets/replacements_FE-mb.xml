@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replacements>
+    <!-- IPA characters; zero -->
+    <item in="ʲ" out="ʼ"   tier="tx,mb"/> 
+    <item in="tʃ" out="č"  tier="tx,mb"/> 
+    <item in="ʃ" out="š"   tier="tx,mb"/>
+    <item in="ɡ" out="g"   tier="tx,mb"/>
+    <item in="ʒ" out="ž"   tier="tx,mb"/>
+    <item in="ts" out="c"  tier="tx,mb"/>
+    <item in="Ø" out=""    tier="tx"/><!-- zero is deleted -->
+    <item in="Ø" out="^0"  tier="mb"/><!-- zero to FLEx zero '^0' -->
+    
+    <item in="^\*$" out="%%"  tier="mb" comment="unanalyzed morphs"></item>
+    <item in="^\*([^\*])" out="$1"  tier="mb" comment="unanalyzed morphs"></item>
+    <item in="nʼʔ" out="nʼiʔ" tier="tx,mb" />
+    
+    <!-- words -->
+    <item in='amulʼe' out='amulʼiʔɛ' tier='tx,mb'/>
+    <item in='bari' out='baree' tier='mb'/>
+    <item in='bazta' out='bazota' tier='tx,mb'/>
+    <item in='bɔɡulʼa' out='bɔɡolʼa' tier='tx,mb' comment='The most important changes are in bold'/>
+    <item in='bɔɡlʼa' out='bɔɡolʼa' tier='tx'/>
+    <item in='bɔzu' out='bɔsu' tier='mb'/>
+    <item in='bunelʼa' out='Bunelʼa' tier='tx,mb'/>
+    <item in='čeziu' out='čezeu' tier='mb'/>
+    <item in='čezi' out='čeze' tier='tx'/>
+    <item in='čizajču' out='čizɛjču' tier='tx,mb'/>
+    <item in='ɔrču' out='ɔrčuʔ' tier='tx,mb'/>
+    <item in='ɔtuze' out='ɔtuzee' tier='tx,mb'/>
+    <item in='dʼara' out='dʼaara' tier='tx,mb'/>
+    <item in='dʼɔa' out='Dʼɔa' tier='tx,mb'/>
+    <item in='dʼɔro' out='dʼɔɔru' tier='tx,mb'/>
+    <item in='dʼipra' out='dʼipora' tier='tx,mb'/>
+    <item in='dʼɔdaz' out='dʼodazu' tier='tx,mb'/>
+    <item in='dʼɔdazu' out='dʼodazu' tier='tx'/>
+    <item in='dʼɔre' out='dʼore' tier='tx,mb'/>
+    <item in='dɔxu' out='dʼoxu' tier='tx,mb'/>
+    <item in='dʼurta' out='dʼurota' tier='tx,mb'/>
+    <item in='ɛdʼuku' out='eddʼuku' tier='tx,mb'/>
+    <item in='ɛze' out='ɛzee' tier='tx,mb'/>
+    <item in='ɛzta' out='ɛzota' tier='tx,mb'/>
+    <item in='ezuɔ' out='ezoʔɔ' tier='tx,mb'/>
+    <item in='^ɛu(,)?$' out='ɛuʔ$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='^bu(,)?$' out='buʔ$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='izeej' out='isaaj' tier='tx,mb'/>
+    <item in='-ju' out='-juʔ' tier='mb'/>
+    <item in='ju(,)?$' out='juʔ$1' tier='tx' comment='только если можно так задать '/>
+    <item in='kake' out='kaake' tier='tx,mb'/>
+    <item in='kata' out='kaata' tier='tx,mb'/>
+    <item in='kamiza' out='kamaza' tier='tx,mb'/>
+    <item in='kɔdʼi' out='kodʼe' tier='tx,mb'/>
+    <item in='koki' out='kɔki' tier='tx,mb'/>
+    <item in='koreu' out='kɔriʔo' tier='tx,mb'/>
+    <item in='kiče' out='keči' tier='tx,mb'/>
+    <item in='kemlʼajgu' out='kemilʼajgu' tier='tx,mb'/>
+    <item in='kɔsaj' out='kosaj' tier='tx,mb'/>
+    <item in='korse' out='kurse' tier='tx,mb'/>
+    <item in='kurxaru' out='kuruxuru' tier='tx,mb'/>
+    <item in='laxuu' out='laxou' tier='mb'/>
+    <item in='laxu' out='laxo' tier='tx'/>
+    <item in='rosa' out='lɔsa' tier='mb'/>
+    <item in='ros' out='lɔs' tier='tx'/>
+    <item in='lɛkus' out='lekus' tier='mb'/>
+    <item in='lɛku' out='leku' tier='tx'/>
+    <item in='lɛu' out='leu' tier='tx,mb'/>
+    <item in='malʼe' out='malʼee' tier='tx,mb'/>
+    <item in='marie' out='mareʔɛ' tier='tx,mb'/>
+    <item in='mɔrga' out='mɔroga' tier='tx,mb'/>
+    <item in='nɛbe' out='nabe' tier='tx,mb'/>
+    <item in='nɛzi' out='nezi' tier='tx,mb'/>
+    <item in='^naa' out='naʔa' tier='tx,mb'/> <!--в начале слова-->
+    <item in='nɔdos' out='nɔdus' tier='mb'/>
+    <item in='nɔxiru' out='nɔxil' tier='mb'/>
+    <item in='nɔɔbera' out='nɔʔɔbera' tier='mb'/>
+    <item in='nɔɔber' out='nɔʔɔber' tier='tx'/>
+    <item in='nɛk' out='nɛɛku' tier='tx,mb'/>
+    <item in='nɛku' out='nɛɛku' tier='tx'/>
+    <item in='nenag' out='nɛnago' tier='tx,mb'/>
+    <item in='nenago' out='nɛnago' tier='tx'/>
+    <item in='ŋaʔu' out='ŋaʔo' tier='tx,mb'/>
+    <item in='ŋɔda' out='ŋoda' tier='tx,mb'/>
+    <item in='-ubi' out='-obi' tier='mb'/>
+    <item in='-uda' out='-oda' tier='mb'/>
+    <item in='-udaraxa' out='-odaraxa' tier='mb'/>
+    <item in='-uzaj' out='-ozaj' tier='mb'/>
+    <item in='pɔkuru' out='pɔkoro' tier='mb'/>
+    <item in='pɔkur' out='pɔkor' tier='tx'/>
+    <item in='pɔlzer' out='pɔlizer' tier='mb'/>
+    <item in='pɔlze' out='pɔlize' tier='tx'/>
+    <item in='pɔxuru' out='pɔxoro' tier='mb'/>
+    <item in='pɔxur' out='pɔxor' tier='tx'/>
+    <item in='pɔzaru' out='pɔzaro' tier='mb'/>
+    <item in='pɔzar' out='pɔzar' tier='tx'/>
+    <item in='peji' out='pej' tier='tx,mb'/>
+    <item in='pere' out='peree' tier='mb'/>
+    <item in='^peri$' out='periʔ' tier='mb'/><!-- как отдельное слово -->
+    <item in='perzi' out='pɛrzi' tier='tx,mb'/>
+    <item in='pɛɛ' out='pɛʔɛ' tier='mb'/>
+    <item in='pɔruu' out='porou' tier='mb'/>
+    <item in='sabie' out='sabieʔ' tier='tx,mb'/>
+    <item in='samaa' out='samaʔa' tier='tx,mb'/>
+    <item in='saame' out='same' tier='tx,mb'/>
+    <item in='sɔbreg' out='sɔburegu' tier='tx,mb'/>
+    <item in='sɔriʔe' out='sɔriʔɛ' tier='tx,mb'/>
+    <item in='seblʼɛjgu' out='sebilʼɛjgu' tier='tx,mb'/>
+    <item in='šemni' out='šemini' tier='tx,mb'/>
+    <item in='sɛkru' out='sɛkoru' tier='mb'/>
+    <item in='sɛkr' out='sɛkor' tier='tx'/>
+    <item in='sɛnku' out='sɛnoku' tier='tx'/>
+    <item in='sɛnuku' out='sɛnoku' tier='tx,mb'/>
+    <item in='sɛnuk' out='sɛnoku' tier='tx'/>
+    <item in='sɛnko' out='sɛnoku' tier='tx,mb'/>
+    <item in='sɛxeri' out='sɛxɛri' tier='tx,mb'/>
+    <item in='sɛzor' out='sɛzoro' tier='tx,mb'/>
+    <item in='sɛzoru' out='sɛzoro' tier='tx'/>
+    <item in='sɛu' out='sɛʔo' tier='tx,mb'/>
+    <item in='silʼejgu' out='silʼeʔejgu' tier='tx,mb'/>
+    <item in='šizet' out='šizetu' tier='tx,mb'/>
+    <item in='šiziu' out='šizeuʔ' tier='tx,mb'/>
+    <item in='sokuʔote' out='sokoʔɔte' tier='tx,mb'/>
+    <item in='šujupi' out='šujuupi' tier='tx,mb'/>
+    <item in='sumɔ' out='sumuɔ' tier='tx,mb'/>
+    <item in='tabiza' out='tabeza' tier='tx,mb'/>
+    <item in='tasizer' out='tasezer' tier='mb'/>
+    <item in='tasize' out='taseze' tier='tx'/>
+    <item in='tatebe' out='tatobe' tier='tx,mb'/>
+    <item in='^tɔl(,)?$' out='tɔlu$1' tier='tx,mb'/><!-- как отдельное слово -->
+    <item in='tɔne' out='tɔnee' tier='tx,mb'/>
+    <item in='tɔnie' out='tɔnee' tier='tx'/>
+    <item in='toni' out='tɔni' tier='tx,mb'/>
+    <item in='tɔnuk' out='tɔnuku' tier='tx,mb'/>
+    <item in='^tɔr(,)?$' out='tɔri$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='tɔše' out='tɔši' tier='tx,mb'/>
+    <item in='tota' out='tɔta' tier='tx,mb'/>
+    <item in='tɔtrau' out='tɔturau' tier='tx,mb'/>
+    <item in='tɔɔjdu' out='tɔʔidu' tier='tx,mb'/>
+    <item in='tɔɔjr' out='tɔʔir' tier='mb'/>
+    <item in='tɔɔj' out='tɔʔi' tier='tx'/>
+    <item in='teni' out='teŋi' tier='tx,mb'/>
+    <item in='^teza(,)?$' out='tezaʔ$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='tɛbu' out='tɛbo' tier='tx,mb'/>
+    <item in='tɛb' out='tɛbo' tier='tx'/>
+    <item in='tɛkru' out='tɛkara' tier='tx,mb'/>
+    <item in='tɛkra' out='tɛkara' tier='tx'/>
+    <item in='tɛkri' out='tɛkari' tier='tx,mb'/>
+    <item in='tɛne' out='tɛni' tier='tx,mb'/>
+    <item in='tɛr' out='tɛro' tier='tx,mb'/>
+    <item in='turba' out='turoba' tier='tx,mb'/>
+    <item in='tunʼi' out='tuunʼi' tier='tx,mb'/>
+    <item in='tuša' out='tuušaa' tier='tx,mb'/>
+    <item in='vertalʼɔt' out='vertɔlʼɔt' tier='tx,mb'/>
+    <item in='xuči' out='xučii' tier='tx,mb'/>
+    <item in='alʼak' out='alʼako' tier='tx,mb'/>
+    <item in='alke' out='alkeʔɛ' tier='tx,mb'/>
+    <item in='^anʼ(,)?$' out='anʼi$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='bɔdu' out='badu' tier='mb'/>
+    <item in='baglʼa' out='bagolʼa' tier='tx,mb'/>
+    <item in='baka' out='Baka' tier='tx,mb'/>
+    <item in='^bar(,)?$' out='baro$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='bɔtoɔ' out='batoʔɔ' tier='mb'/>
+    <item in='bɔtoɔ' out='bɔtoʔɔ' tier='tx'/>
+    <item in='^bemu(,)?$' out='bemo$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='^bem(,)?$' out='bemo$1' tier='tx' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='ɔba' out='ɔbi' tier='mb'/>
+    <item in='^dʼuk(,)?$' out='dʼuku$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='dʼurak' out='dʼurako' tier='tx,mb'/>
+    <item in='dʼuzire' out='dʼusiri' tier='mb'/>
+    <item in='dʼuzire' out='dʼuziri' tier='tx'/>
+    <item in='ɛče' out='ɛči' tier='tx,mb'/>
+    <item in='kadʼaz' out='kadʼazo' tier='tx,mb'/>
+    <item in='kɔjil' out='kɔjilu' tier='tx,mb'/>
+    <item in='^mɛr(,)?$' out='mɛro$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='^mir(,)?$' out='miru$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='^mo(,)?$' out='mu$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='^sɔz(,)?$' out='sɔzu$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='taju' out='tajo' tier='tx,mb'/>
+    <item in='^tis(,)?$' out='tiso$1' tier='tx,mb' comment='если можно, лучше задать как отдельное слово'/>
+    <item in='tanʼeu' out='taʔanʼeʔo' tier='tx,mb'/>
+    <item in='^u(,)?$' out='uuʔ$1' tier='tx,mb' comment='только если можно задать как отдельное слово'/>
+    <item in='udaʔ' out='uudaʔ' tier='tx,mb'/>
+    <item in='udʼiʔ' out='uudʼiʔ' tier='tx,mb'/>
+    <item in='^ɔbuuš(,)?$' out='ɔbuš$1' tier='tx' comment="Merged in morphemes!"/>
+    <item in='šiznaʔ' out='šizinaʔ' tier='tx,mb' comment=''/>
+    <item in='šizzaʔ' out='šizizaʔ' tier='tx,mb' comment=''/>
+    <item in='šizziʔ' out='šiziziʔ' tier='tx,mb' comment=''/>
+    <item in='šizzuʔ' out='šizizuʔ' tier='tx,mb' comment=''/>
+    <item in='nɔznaʔ' out='nɔzunaʔ' tier='tx,mb' comment=''/>
+    <item in='nɔzdaʔ' out='nɔzudaʔ' tier='tx,mb' comment=''/>
+    <item in='nɔndaʔ' out='nɔnidaʔ' tier='tx,mb' comment=''/>
+    <item in='nɔzdʼiʔ' out='nɔzudʼiʔ' tier='tx,mb' comment=''/>
+    <item in='nɔndʼiʔ' out='nɔnidʼiʔ' tier='tx,mb' comment=''/>
+    <item in='nɔzduʔ' out='nɔzuduʔ' tier='tx,mb' comment=''/>
+    <item in='nɔnduʔ' out='nɔniduʔ' tier='tx,mb' comment=''/>
+    <item in='dkod' out='dokod' tier='tx,mb' comment=''/>
+    <item in='zkod' out='zokod' tier='tx' comment=''/>
+    <item in='tkod' out='tokod' tier='tx' comment=''/>
+    <item in='^ŋulʼ(,)?$' out='ŋulʼi$1' tier='tx,mb' comment='Только как отдельное слово'/>
+    <item in='dʼago' out='dʼagu' tier='tx,mb' comment=''/>
+    <item in='^dʼag(,)?$' out='dʼagu$1' tier='tx' comment='Только как отдельное слово'/>
+    <item in='kert' out='keret' tier='tx' comment=''/>
+    <item in='kern' out='keren' tier='tx' comment=''/>
+    <item in='kerč' out='kereč' tier='tx' comment=''/>
+    <item in='^modʼ(,)?$' out='modʼi$1' tier='tx' comment='Только как отдельное слово'/>
+    <item in='tuuj' out='tuʔuj' tier='tx,mb' comment=''/>
+    <item in='zuuj' out='zuʔuj' tier='tx,mb' comment=''/>
+    <item in='duuj' out='duʔuj' tier='tx,mb' comment=''/>
+</replacements>    
+

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1 id="flextext-interlinear-import-preserving-morpheme-glosses">Flextext interlinear import preserving morpheme
+        glosses
+    </h1>
+    <div>
+        <p>This tool can import interlinear glossed texts (IGTs) into an existing SIL FLEx project.
+            <br> Read more in <a
+                href="https://github.com/git-debase-verbose/FWdata-Import/blob/main/papers/riaposov_et_al-2025-IGT_import_FLEx.pdf">(Riaposov
+                et al. 2025)</a>.
+        </p>
+    </div>
+    <h2 id="prerequisites">Prerequisites</h2>
+    <h3 id="data">Data</h3>
+    <ol>
+        <li>One or more IGTs in <strong>flextext XML</strong> format. This can originate from either Toolbox, ELAN or
+            FLEx:
+
+            <ul>
+                <li><strong>FLEx</strong> has a built-in export into flextext XML
+                    (<code>Export interlinear as &quot;ELAN, SayMore, FLEx&quot;</code>).</li>
+                <li>
+                    <strong>ELAN</strong> has a built-in export into flextext
+                    (<code>Export as &quot;FLEx File&quot;</code>). These files will probably need a preprocessing step
+                    to treat punctuation, unless previously
+                    exported
+                    from FLEx into ELAN.
+                </li>
+                <li>
+                    <strong>Toolbox</strong> files can be converted into flextext via ELAN: first import into ELAN
+                    with
+                    the built-in Toolbox import.
+                </li>
+            </ul>
+            <p><strong>NB! </strong> Flextexts should meet these criteria:
+            <ul>
+                <li>
+                </li>
+                <li>
+                </li>
+            </ul>
+            If you are not sure about your files you can check them directly in the tool before proceeding.
+            </p>
+        </li>
+        <li>
+            Existing <strong>FLEx project</strong> (setup a new one if you don't have one)
+            This must exist before you start the scripts. In particular, you should:
+            <ul>
+                <li>
+                    Know the exact <strong>writing system codes</strong> for (i) the analyzed text (main
+                    <em>Baseline</em> or <em>Vernacular language</em> writing system), (ii) the glosses and
+                    translations
+                    (two <em>Analysis languages</em> are supported). These codes must be provided in the launcher
+                    dialog.
+                </li>
+                <li>
+                    Make sure that each <strong>part-of-speech label</strong> used in the IGT matches one existing in
+                    the
+                    FLEx project (<code>Category &gt; Abbreviation</code> in the first <em>Analysis language</em>
+                    writing system).
+                </li>
+            </ul>
+        </li>
+    </ol>
+    <h3 id="system-requirements">System requirements</h3>
+    <ol>
+        <li>
+            Any reasonably recent version of <a href="https://www.python.org/downloads/"><strong>Python
+                    3</strong></a> and all the modules listed in requirements.txt
+        </li>
+        <li>
+            Currently, the launcher does not yet handle the preprocessing XSLT scripts which require <strong>XSLT
+                3.0/XPath 3.1</strong> support. They can be run e.g. with the free editions of <a
+                href="https://www.saxonica.com/">Saxon</a> (developed with Saxon 9.9, <a
+                href="https://www.saxonica.com/download/download_page.xml">current version</a> is Saxon 12)
+        </li>
+        <li>
+            <a href="https://software.sil.org/fieldworks/"><strong>SIL FLEx</strong> (FieldWorks Language
+                Explorer)</a>
+            (tested with version 9.*)
+            FLEx does not need to be necessarily installed on the same system as the conversion scripts, but you
+            will
+            likely need to move some files back and forth between the two.
+        </li>
+        <li>
+            <a href="https://archive.mpi.nl/tla/elan">ELAN</a> Multimedia Annotator -- for texts glossed in <a
+                href="https://software.sil.org/toolbox/">Toolbox</a> and/or in ELAN
+        </li>
+        </ul>
+        <h2 id="how-to-use">How to use</h2>
+        <ol>
+            <li>
+                Setup/use a FLEx project (see above)
+            </li>
+            <li>
+                Prepare the FLEx project file (<em>.fwdata</em>)
+                <ul>
+                    <li><strong>NB! Backup the project</strong>
+                        (<code>File &gt; Project management &gt; Backup this project</code>) and close the project.</li>
+                    <li>Locate the <em>.fwdata</em> file in the FLEx Projects folder (typically
+                        <code>C:\ProgramData\SIL\FieldWorks\Projects\&lt;ProjectName&gt;\&lt;ProjectName&gt;.fwdata\</code>).
+                        Alternatively, you can extract it from the <em>.fwbackup</em> file which is a regular zip
+                        archive.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Put all your <em>.flextext</em> IGTs into one folder (nested subfolders are possible).
+            </li>
+            <li>
+                <!--p>Run <em>launcher.py</em> <img src="Flextext2FLEx.png" alt="launcher.py dialog"></p-->
+                <ul>
+                    <li>Enter writing system codes in the respective fields in the <em>launcher.py</em>
+                        (<code>Target language</code> = <em>Vernacular</em>,
+                        <code>Glossing</code>
+                        &amp; <code>Alternative glossing</code> = <em>Analysis</em>)
+                    </li>
+                    <li>Select the FLEx project file (<em>.fwdata</em>) (<code>FLEx Database</code>)</li>
+                    <li>
+                        Select the folder containing the IGTs (<code>Path to flextext</code>).
+                        All files in the selected folder (and subfolders) will be processed.
+                    </li>
+                    <li>
+                        Click <code>Parse</code>.
+                        <em>parserFWdata.py</em> analyzes the <em>.fwdata</em> file to list objects (wordforms,
+                        morphemes,
+                        analyses etc.) already present in the FLEx project.
+
+                    </li>
+                    <li>
+                        Click <code>Convert.
+                        <em>converter.py</em> creates an augmented copy of the original <em>.fwdata</em> and stores it
+                        in
+                        the folder containing the scripts as <em>Converted-\<ProjectName\>.fwdata</em>.
+                </li>
+            </ul>
+        </li>
+        <li>
+            Replace the original <em>.fwdata</em> file with the new augmented copy.
+            <ul>
+                <li>
+                    Rename the new copy identically to the original <em>.fwdata</em> (i.e. remove the
+                        <code>Converted-</code> prefix) and
+
+                    </li>
+                    <li>
+                        either replace the original <em>.fwdata</em> file in the FLEx Projects folder and open the
+                        project in
+                        FLEx as usual or
+                        <ul>
+                            <li>copy the <em>.fwbackup</em> file (to keep an unaltered version of the backup!)</li>
+                            <li>replace the original <em>.fwdata</em> file inside the copy of <em>.fwbackup</em> file
+                                (which
+                                is
+                                a zip archive)</li>
+                            <li>restore the project from this new backup</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Inspect the new project in FLEx and cleanup
+                <ul>
+                    <li>It is highly recommended to run some cleanup utilities from the
+                        <code>Tools &gt; Utilities</code>
+                        menu:
+                        <ul>
+                            <li><code>Find and Fix errors in a FieldWorks data (XML)</code>
+                                This utility must be run <strong>from another project</strong> (close the current
+                                project,
+                                open
+                                another, run the utility and select the target project).</li>
+                            <li>Reopen the target project and run the following utilities:
+                                <code>Merge Duplicate Analyses</code>, <code>Merge Duplicate Wordforms</code> and
+                                <code>Write Everything</code>.
+                            </li>
+                            <li>Create a fresh backup.</li>
+                        </ul>
+                    </li>
+                    <li>Manually review changes in homonyms, allomorphs, multiple senses in the lexicon. You might need
+                        to
+                        merge
+                        or split some of them.</li>
+                    <li>If something is still wrong, restore from the original (unaltered) backup and let us know --
+                        perhaps
+                        we
+                        can find a solution.</li>
+                </ul>
+            </li>
+            </ul>
+
+</body>
+
+</html>

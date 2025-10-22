@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<replacements>
+    <item in='_' out='.' tier='ge,gr' comment='чтобы соединилось множество лексических глосс, типа sit_down > sit.down'/>
+    <item in="\*\*\*" out="%%" tier="ge,gr" comment="unanalyzed morphs"></item>
+    
+    <!-- glosses (in ge and gr tiers) -->
+    <item in='RESTR\.ADJ' out='SEL' tier='ge,gr' comment='порядок важен, см. выше'/>
+    <item in='TRANSL' out='ESS' tier='ge,gr' comment='порядок важен, см. выше'/>
+    <item in='CMP2' out='CMP' tier='ge,gr'/>
+    <item in='COM' out='SOC' tier='ge,gr'/>
+    <item in='EVEN' out='INS' tier='ge,gr'/>
+    <item in='FOC' out='TOP' tier='ge,gr'/>
+    <item in='RESTR' out='LIM' tier='ge,gr'/>
+    <item in='DAT' out='LAT' tier='ge,gr'/>
+    <item in='PTCP\.ANT\.NEG' out='PTCP.ABES' tier='ge,gr'/>
+    <item in='PTCP\.ANT\.PASS' out='PTCP.PASS' tier='ge,gr'/>
+    <item in='SUPP' out='SIMIL' tier='ge,gr'/>
+    <item in='\.M($|\.)' out='.MD$1' tier='ge,gr' comment='очевидно, просто M заменять нельзя'/>
+    <item in='-M($|\.)' out='-MD$1' tier='ge,gr' comment='очевидно, просто M заменять нельзя'/>
+    <item in='SOsg' out='SG.O' tier='ge,gr'/>
+    <item in='\.SOpl' out='.NSG.O' tier='ge,gr'/>
+    <item in='-SOpl' out='-PL.O' tier='ge,gr'/>
+    <item in='SOdu' out='DU.O' tier='ge,gr'/>
+    <item in='SOnsg' out='NSG.O' tier='ge,gr'/>
+    <item in='CONN' out='CNG' tier='ge,gr'/>
+    <item in='CVB($|[^\.])' out='INF$1' tier='ge,gr' comment='не знаю, можно ли реализовать, но исключая случаи, когда после CVB точка; если нельзя, то не надо эту замену'/>
+    <item in='CVB\.COND' out='COND' tier='ge,gr'/>
+    <item in='CVB\.IRR' out='COND.IRR' tier='ge,gr'/>
+    <item in='CVB\.ANT' out='CVB.IMM' tier='ge,gr'/>
+    <item in='CONT' out='PRM' tier='ge,gr'/>
+    <item in='2SG\.S\.IMP' out='IMP.2SG.S' tier='ge,gr'/>
+    <item in='2SG\.MD\.IMP' out='IMP.2SG.MD' tier='ge,gr' comment='учтена замена M > MD'/>
+    <item in='2SG\.SG\.O\.IMP' out='IMP.2SG.SG.O' tier='ge,gr' comment='учтена замена SOsg > SG.O'/>
+    <item in='2SG\.PL\.O\.IMP' out='IMP.2SG.PL.O' tier='ge,gr' comment='учтена замена SOpl > PL.O'/>
+    <item in='2SG\.IMP' out='IMP.2SG' tier='ge,gr'/>
+    <item in='3SG\.S\.IMP' out='IMP.3SG.S' tier='ge,gr'/>
+    <item in='3PL\.S\.IMP' out='IMP.3PL.S' tier='ge,gr'/>
+    <item in='3SG\.MD\.IMP' out='IMP.3SG.MD' tier='ge,gr' comment='учтена замена M > MD'/>
+    <item in='3PL\.MD\.IMP' out='IMP.3PL.MD' tier='ge,gr' comment='учтена замена M > MD'/>
+    <item in='3SG\.SG\.O\.IMP' out='IMP.3SG.SG.O' tier='ge,gr' comment='учтена замена SOsg > SG.O'/>
+    <item in='3SG\.PL\.O\.IMP' out='IMP.3SG.PL.O' tier='ge,gr' comment='учтена замена SOpl > PL.O'/>
+    <item in='3PL\.SG\.O\.IMP' out='IMP.3PL.SG.O' tier='ge,gr' comment='учтена замена SOsg > SG.O'/>
+    <item in='3PL\.PL\.O\.IMP' out='IMP.3PL.PL.O' tier='ge,gr' comment='учтена замена SOpl > PL.O'/>
+    <item in='DEB' out='NEC' tier='ge,gr'/>
+    <item in='-Q' out='-INTER' tier='ge,gr' comment='просто Q на всякий случай не стоит'/>
+    <item in='CONJ' out='SBJV' tier='ge,gr'/>
+    <item in='NEG\.EMPH' out='EMPH.NEG' tier='ge,gr'/>
+    <item in='EXC\.VOC' out='VOC' tier='ge,gr'/>
+    <item in='EXC' out='EXCL' tier='ge,gr'/>
+    <item in='CAUS1' out='TR' tier='ge,gr'/>
+    <item in='CAUS2' out='PASS' tier='ge,gr' comment='здесь будет некоторое количество шума'/>
+    <item in='CAUS3' out='TR' tier='ge,gr'/>
+    <item in='CAUS4' out='TR' tier='ge,gr'/>
+    <item in='DEST' out='DST' tier='ge,gr'/>
+    <item in='DIM1' out='DIM' tier='ge,gr'/>
+    <item in='DIM2' out='DIM' tier='ge,gr'/>
+    <item in='AUGM\.ADJ' out='AUG' tier='ge,gr' comment='учтена замена _ > .'/>
+    <item in='INC1' out='TRL' tier='ge'/>
+    <item in='NMLZ2' out='ACT' tier='ge'/>
+    
+    <!-- lexical glosses in ge -->
+    <item in='they\(du\)' out='3DU' tier='ge'/>
+    <item in='they' out='3PL' tier='ge'/>
+    <item in='s/he' out='3SG' tier='ge'/>
+    <item in='be\(ipfv\)' out='be' tier='ge'/>
+    <item in='exist\(ipfv\)' out='be' tier='ge'/>
+    <item in='in\.the\.direction' out='to' tier='ge' comment='учтена замена _ > .'/>
+    <item in='and\.so' out='after.all' tier='ge' comment='учтена замена _ > .'/>
+    <item in='leave_behind\(pfv\)' out='leave(pfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='stay_behind\(pfv\)' out='stay(pfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='obtain\(pfv\)' out='kill(pfv)' tier='ge'/>
+    <item in='bull' out='male.reindeer' tier='ge'/>
+    <item in='for\.a\.long\.time' out='far.away' tier='ge'/>
+    <item in='where/when' out='when' tier='ge'/>
+    <item in='stand\.out\(ipfv\)' out='stand.upright(ipfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='^I($|\.)' out='1SG$1' tier='ge' comment='как отдельное слово в том числе перед точкой, если возможна такая замена'/>
+    <item in='^we($|\.)' out='1PL$1' tier='ge' comment='как отдельное слово в том числе перед точкой, если возможна такая замена'/>
+    <item in='we\(du\)' out='1DU' tier='ge'/>
+    <item in='you\(sg\)' out='2SG' tier='ge'/>
+    <item in='you\(du\)' out='2DU' tier='ge'/>
+    <item in='you\(pl\)' out='2PL' tier='ge'/>
+    <item in='quiet\.down\(pfv\)' out='stop(pfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='mature\(pfv\)' out='ripen(pfv)' tier='ge'/>
+    <item in='extent' out='until' tier='ge'/>
+    <item in='bird' out='animal' tier='ge'/>
+    <item in='dad\(voc\)' out='daddy' tier='ge'/>
+    <item in='verdure' out='grass' tier='ge'/>
+    <item in='talk($|[^\(])' out='speech$1' tier='ge'/><!-- если справа нет скобки -->
+    <item in='granny\(voc\)' out='granny' tier='ge'/>
+    <item in='abuse\(ipfv\)' out='quarrel(ipfv)' tier='ge'/>
+    <item in='hill\.ridge' out='tundra' tier='ge' comment='учтена замена _ > .'/>
+    <item in='marsh' out='puddle' tier='ge'/>
+    <item in='climb\.into\(pfv\)' out='go.into(pfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='be\.adroit\(ipfv\)' out='be.strong(ipfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='tie\.up\(pfv\)' out='bind(pfv)' tier='ge' comment='учтена замена _ > .'/>
+    <item in='to\.opposite\.bank' out='opposite.side' tier='ge'/>
+    <item in='mom\(voc\)' out='mom' tier='ge'/>
+    <item in='splashes' out='tear' tier='ge'/>
+    <item in='alike' out='similar' tier='ge' comment=''/>
+    <item in='shoe' out='boot' tier='ge' comment=''/>
+    <item in='necessary(ipfv)' out='be.necessary(ipfv)' tier='ge' comment=''/>
+</replacements>    
+

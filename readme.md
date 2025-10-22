@@ -1,5 +1,11 @@
 # Flextext interlinear import preserving morpheme glosses 
 
+Aleksandr Riaposov, Alexandre Arkhipov, Elena Lazarenko
+
+University of Hamburg
+
+## Github repository: [https://github.com/git-debase-verbose/FWdata-Import](https://github.com/git-debase-verbose/FWdata-Import)
+
 This tool can import interlinear glossed texts (IGTs) into an existing SIL FLEx project.
 
 Read more in the [(Riaposov et al. 2025)](papers/riaposov_et_al-2025-IGT_import_FLEx.pdf) paper provided under /papers.
@@ -43,11 +49,15 @@ Read more in the [(Riaposov et al. 2025)](papers/riaposov_et_al-2025-IGT_import_
 
 * Prepare the FLEx project file (*.fwdata*)
     * **NB! Backup the project** (`File > Project management > Backup this project`) and close the project.
-    * Locate the *.fwdata* file in the FLEx Projects folder (typically `C:\ProgramData\SIL\FieldWorks\Projects\<ProjectName>\<ProjectName>.fwdata\`).         Alternatively, you can extract it from the *.fwbackup* file which is a regular zip archive.
+    * Locate the *.fwdata* file in the FLEx Projects folder (typically `C:\ProgramData\SIL\FieldWorks\Projects\<ProjectName>\<ProjectName>.fwdata`).
+      Alternatively, you can extract it from the *.fwbackup* file which is a regular zip archive.
         
 * Put all your *.flextext* IGTs into one folder (nested subfolders are possible).          
     
-* Run *launcher.py* - ![launcher.py dialog](img/Flextext2FLEx.png)
+* Run *launcher.py* 
+
+    ![launcher.py dialog](Flextext2FLEx.png)
+    
     * Enter writing system codes (`Target language` = *Vernacular*, `Glossing` & `Alternative glossing` = *Analysis*)
     * Select the FLEx project file (*.fwdata*) (`FLEx Database`)
     * Select the folder containing the IGTs (`Path to flextext`). 
