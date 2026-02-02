@@ -1,6 +1,7 @@
 from datetime import date, datetime
 import xml.etree.ElementTree as ET
 import uuid
+import re
 import os
 import json
 
@@ -48,7 +49,7 @@ class Converter:
 
 
         # GUID handling
-        # Note: turned off to test performance
+        # Note: turned off for performance reasons
         if check_guids:
             rtlist = self.FWroot.findall(".//rt")
             self.guidList = list()
@@ -57,11 +58,44 @@ class Converter:
 
             rtlist, rt = None, None #cleaning up
 
+        # Check POS tags
+        self.posChecker(self, path)
+
+        # Start the conversion
         self.convertFiles(self, path)
         # TODO: still somewhat provisional name for the output
         fwdata.write(f'Converted-{os.path.basename(xml)}', encoding='utf-8', xml_declaration=True)
 
         print("Done converting!")
+
+    def posChecker(self, path):
+        unknownPOS = False
+        unknownPOStags = set()
+
+        filelist = self.getFilenames(self, path)
+        posTagsFWdata = set()
+        for entry in self.posData:
+            posTagsFWdata.add(entry['pos'])
+
+        for f in filelist:
+            #print(f'Now checking {f.name}')
+            tree = ET.parse(f.path)
+            root = tree.getroot()
+
+            allPOStags = root.findall(".//word/morphemes/morph/item[@type='msa']")
+            for POS in allPOStags:
+                if POS.text is not None:
+                    inflDeriv = re.search(r'^[^:>]+', POS.text)
+                    mainPOS = inflDeriv.group(0) if inflDeriv else POS.text  
+                    if mainPOS.strip('-=') not in posTagsFWdata:
+                        unknownPOS = True
+                        unknownPOStags.add(mainPOS.strip('-='))
+
+        if unknownPOS:
+            self.main_window.pos_not_found_error(str(unknownPOStags))
+            #print(f'Pars of speech {unknownPOStags} were not found in the database. Add them to the database and try again.')
+            raise Exception(f'Pars of speech {unknownPOStags} were not found in the database. Add them to the database and try again.')
+
 
     def createGUID(self):
         if self.check_guids:
@@ -490,6 +524,8 @@ class Converter:
                 catGuid = i["id"]
         if catGuid:
             surPOS = ET.SubElement(category, "objsur", attrib={"guid": catGuid, "t": "r"})
+        else:
+            print(f'{catValue} not found in the .fwdata!')
 
         evaluation = ET.SubElement(wfiAnalysisRt, "Evaluations")
         # TODO un-hardcode guids for evaluations

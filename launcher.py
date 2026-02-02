@@ -1,4 +1,5 @@
 import os
+import sys
 import tkinter as tk
 import tkinter.filedialog as tkfd
 
@@ -271,7 +272,7 @@ class MainWindow(tk.Frame):
             self.start_converter()           
         elif run_status is not None:
             if self.pos_not_found != "":
-                result_text = f"{title} has crashed and burned because {self.pos_not_found} was not found in the fwdata!\nCheck the logfile at:\n{run_status}"
+                result_text = f"Parts of speech {self.pos_not_found} were not found in the target FLEx project!\nAdd them to the project and start again.\nMore information in the logfile at:\n{run_status}"
             else:
                 result_text = f"{title} has crashed and burned!\nCheck the logfile at:\n{run_status}"
         elif run_status is None and task_name == "converter":
@@ -323,8 +324,12 @@ class MainWindow(tk.Frame):
 
     def load_html_documentation(self):
         try:
-            with open("documentation.html", "r", encoding="utf-8") as file:
-                return file.read()
+            base_path = sys._MEIPASS if hasattr(sys, "_MEIPASS") else os.path.abspath(".")
+            doc_path = os.path.join(base_path, "documentation.html")
+
+            with open(doc_path, encoding="utf-8") as f:
+                return f.read()
+
         except FileNotFoundError:
             return "<h3>Documentation not found.</h3>"
 

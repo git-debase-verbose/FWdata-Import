@@ -83,7 +83,7 @@ def run_precheck(directory, targetws, glossws):
                     if w.text is not None:
                         continue
                     else:
-                        print(f'{f.name}: Item with type="{w.get('type')}" has no text content, word guid: {w.get("guid")}', file=logfile)
+                        #print(f'{f.name}: Item with type="{w.get('type')}" has no text content, word guid: {w.get("guid")}', file=logfile)
                         result["errors"] = True
 
     return result

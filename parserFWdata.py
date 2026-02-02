@@ -46,8 +46,16 @@ def export_pos(root, csv=False):
 
     for pos in posList:
         guid = pos.get("guid")
-        abbr = pos.findall(".//Abbreviation/AUni")[0].text
-        name = pos.findall(".//Name/AUni")[0].text
+        if len(pos.findall(".//Abbreviation/AUni")) > 0:
+            abbr = pos.findall(".//Abbreviation/AUni")[0].text
+        else:
+            print(f'Part of speeech with the ID {guid} has no abbreviation, skipping...')
+            continue
+        if len(pos.findall(".//Name/AUni")) > 0:
+            name = pos.findall(".//Name/AUni")[0].text
+        else:
+            print(f'Part of speeech with the ID {guid} has no name, skipping...')
+            continue
 
         output.append({ "pos": abbr, "id": guid, "name": name })
 

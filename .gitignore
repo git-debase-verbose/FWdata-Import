@@ -9,3 +9,6 @@
 !*.xml
 !*.xsl
 !preprocessing/*
+!dist/*
+build/*
+.idea/*
