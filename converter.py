@@ -74,6 +74,7 @@ class Converter:
 
         filelist = self.getFilenames(self, path)
         posTagsFWdata = set()
+        posTagsFWdata.add('***') # the common FLEx / Toolbox way to mark unkown POS, no need to add it to the database
         for entry in self.posData:
             posTagsFWdata.add(entry['pos'])
 
@@ -93,8 +94,8 @@ class Converter:
 
         if unknownPOS:
             self.main_window.pos_not_found_error(str(unknownPOStags))
-            #print(f'Pars of speech {unknownPOStags} were not found in the database. Add them to the database and try again.')
-            raise Exception(f'Pars of speech {unknownPOStags} were not found in the database. Add them to the database and try again.')
+            #error_message = f'Pars of speech {unknownPOStags} were not found in the database. Add them to the database and try again.'
+            raise Exception(f'Pars of speech {str(unknownPOStags)} were not found in the database. Add them to the database and try again.').with_traceback(tracebackobj)
 
 
     def createGUID(self):
@@ -158,7 +159,7 @@ class Converter:
         else:
             return None
 
-    # Check if a gloss-wordfform pair exists in the database
+    # Check if a gloss-wordform pair exists in the database
 
     def checkGloss(self, gloss, morphform):
         for lex in self.lexData:
@@ -267,9 +268,11 @@ class Converter:
         aUniEn = ET.SubElement(gloss, "AUni", attrib={"ws": self.glang1})
         aUniEnXPath = "./item[@type='gls'][@lang='" + self.glang1 + "']"
         aUniEn.text = word.find(aUniEnXPath).text.lstrip("-")
-        aUniRu = ET.SubElement(gloss, "AUni", attrib={"ws": self.glang2})
+        
         aUniRuXPath = "./item[@type='gls'][@lang='" + self.glang2 + "']"
-        aUniRu.text = word.find(aUniRuXPath).text.lstrip("-")
+        if word.find(aUniRuXPath) is not None:
+            aUniRu = ET.SubElement(gloss, "AUni", attrib={"ws": self.glang2})
+            aUniRu.text = word.find(aUniRuXPath).text.lstrip("-")
 
         MSA = ET.SubElement(lexSenseRt, "MorphoSyntaxAnalysis")
         lexemeSur = ET.SubElement(MSA, "objsur", attrib={"guid": msa, "t": "r"})
@@ -408,8 +411,11 @@ class Converter:
 
                 self.FWroot.append(moInflAffixMsaRt)
 
-        self.lexData.append({'LexEntry-GUID': guid, 'GlossEn': aUniEn.text, 'GlossRu': aUniRu.text,'LexSense-GUID': sense, 'MorphoSyntaxAnalysis-GUID': msa, 'forms': [{'Form': alloUniEn.text, 'Form-GUID': morph}]})
-
+        if "aUniRu" in locals().keys():
+            self.lexData.append({'LexEntry-GUID': guid, 'GlossEn': aUniEn.text, 'GlossRu': aUniRu.text,'LexSense-GUID': sense, 'MorphoSyntaxAnalysis-GUID': msa, 'forms': [{'Form': alloUniEn.text, 'Form-GUID': morph}]})
+        else:
+            self.lexData.append({'LexEntry-GUID': guid, 'GlossEn': aUniEn.text, 'GlossRu': '', 'LexSense-GUID': sense, 'MorphoSyntaxAnalysis-GUID': msa, 'forms': [{'Form': alloUniEn.text, 'Form-GUID': morph}]})
+ 
         return wfiGlossGuid # Returns None if there are no homographs
 
     # Create a morpheme bundle
@@ -515,7 +521,7 @@ class Converter:
 
         category = ET.SubElement(wfiAnalysisRt, "Category")
         try:
-            catValue = word.find(".//morphemes/morph/item[@type='msa']").text
+            catValue = word.find(".//morphemes/morph/item[@type='msa']").text.strip("-=")
         except:
             catValue = None # When there is no msa
         catGuid = None # Handling unknown POSs
@@ -715,14 +721,15 @@ class Converter:
         segnum = phrase.find(".//item[@type='segnum']")
         litTranslList.append(segnum)
         for transl in litTranslList:
-            if transl.get("type") == "segnum":
-                # Ref tier writing system, it's not universally applicable
-                lang = "en-x-ref"
-            else:
-                lang = transl.get("lang")
-            litAstr = ET.SubElement(litTranslation, "AStr", attrib={"ws": lang})
-            litRun = ET.SubElement(litAstr, "Run", attrib={"ws": lang})
-            litRun.text = transl.text
+            if transl is not None:
+                if transl.get("type") == "segnum":
+                    # Ref tier writing system, it's not universally applicable
+                    lang = "en-x-ref"
+                else:
+                    lang = transl.get("lang")
+                litAstr = ET.SubElement(litTranslation, "AStr", attrib={"ws": lang})
+                litRun = ET.SubElement(litAstr, "Run", attrib={"ws": lang})
+                litRun.text = transl.text
 
         if mediaguid is not None:
             mediaURI = ET.SubElement(segmentRt, "MediaURI")

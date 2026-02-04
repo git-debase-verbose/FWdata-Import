@@ -207,7 +207,7 @@ class MainWindow(tk.Frame):
                 error_time = re.sub(r'[ \.\:]', "-", str(datetime.now()))
                 errorlogfile = "error-" + error_time + ".log"
                 with open(errorlogfile, "w") as logfile:
-                    traceback.print_exception(e, file=logfile)
+                    traceback.print_tb(e.__traceback__, file=logfile)
                 return errorlogfile
 
         self.show_progress("Converting", task_func, task_name="converter")

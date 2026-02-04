@@ -190,7 +190,10 @@ def export_wfianalysis(root, target, csv=None):
         ownerid = wifi.get("ownerguid")
 
         wordformXPath = ".//rt[@guid='" + ownerid + "']/Form/AUni[@ws='" + target + "']"
-        wordform = root.findall(wordformXPath)[0].text
+        try:
+            wordform = root.findall(wordformXPath)[0].text
+        except:
+            wordform = ""
 
         try:
             categoryGUID = wifi.findall(".//Category/objsur")[0].get("guid")
@@ -260,7 +263,10 @@ def export_moinflaffixslot(root, csv=False):
     for miasd in miasdList:
         guid = miasd.get("guid")
         ownerid = miasd.get("ownerguid")
-        name = miasd.findall(".//Name/AUni")[0].text
+        try:
+            name = miasd.findall(".//Name/AUni")[0].text
+        except:
+            name = ""
 
         output.append({ "slot": name, "id": guid, "posid": ownerid })
 
@@ -309,7 +315,10 @@ def export_speakerdata(root, csv=False):
     for sp in speakerList:
         guid = sp.get("guid")
         cmPossibilityId = sp.get("ownerguid")
-        value = sp.findall(".//Name/AUni")[0].text
+        try:
+            value = sp.findall(".//Name/AUni")[0].text
+        except:
+            value = ""
 
         output.append({"tag": value, "id": guid, "cmPossibilityId": cmPossibilityId})
 
