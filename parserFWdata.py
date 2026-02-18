@@ -213,7 +213,7 @@ def export_wfianalysis(root, target, csv=None):
             morphBundle = root.findall(morphXPath)[0]
 
             try:
-                morphText = morphBundle.findall(".//Form/AStr/Run")[0].text
+                morphText = morphBundle.findall(".//Form/AStr/Run")[0].text.strip("-=")
             except:
                 morphText = ""
 

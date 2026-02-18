@@ -86,11 +86,13 @@ class Converter:
             allPOStags = root.findall(".//word/morphemes/morph/item[@type='msa']")
             for POS in allPOStags:
                 if POS.text is not None:
-                    inflDeriv = re.search(r'^[^:>]+', POS.text)
-                    mainPOS = inflDeriv.group(0) if inflDeriv else POS.text  
-                    if mainPOS.strip('-=') not in posTagsFWdata:
-                        unknownPOS = True
-                        unknownPOStags.add(mainPOS.strip('-='))
+                    # Check the stem POS only
+                    if not re.search(r'^[-=].*|.*[-=]$', POS.text):
+                        inflDeriv = re.search(r'^[^:>]+', POS.text)
+                        mainPOS = inflDeriv.group(0) if inflDeriv else POS.text
+                        if mainPOS.strip('-=') not in posTagsFWdata:
+                            unknownPOS = True
+                            unknownPOStags.add(mainPOS.strip('-='))
 
         if unknownPOS:
             self.main_window.pos_not_found_error(str(unknownPOStags))
@@ -117,11 +119,11 @@ class Converter:
         for m in morphemes:
             morph = m.find("./item[@type='cf']")
             try:
-                morph = morph.text.lstrip("-")
+                morph = morph.text.strip("-=")
                 glossEnXPath = "./item[@type='gls'][@lang='" + self.glang1 + "']"
-                glossEn = m.find(glossEnXPath).text.lstrip("-")
+                glossEn = m.find(glossEnXPath).text.strip("-=")
                 glossRuXPath = "./item[@type='gls'][@lang='" + self.glang2 + "']"
-                glossRu = gloss = m.find(glossRuXPath).text.lstrip("-")
+                glossRu = gloss = m.find(glossRuXPath).text.strip("-=")
                 morphList.append({ "morph": morph, "glossEn": glossEn, "glossRu": glossRu })
             except:
                 # No matches with type='cf' - probably an unknown element
@@ -230,7 +232,7 @@ class Converter:
         lastHomoGuid = None
         for lex in self.lexData:
             for i in range(len(lex["forms"])):
-                if lex["forms"][i]["Form"] == word.find("./item[@type='cf']").text.strip("-"): 
+                if lex["forms"][i]["Form"] == word.find("./item[@type='cf']").text.strip("-="): 
                     homoCounter = homoCounter + 1
                     lastHomoGuid = lex["LexEntry-GUID"]
         if homoCounter > 0:
@@ -267,12 +269,12 @@ class Converter:
         gloss = ET.SubElement(lexSenseRt, "Gloss")
         aUniEn = ET.SubElement(gloss, "AUni", attrib={"ws": self.glang1})
         aUniEnXPath = "./item[@type='gls'][@lang='" + self.glang1 + "']"
-        aUniEn.text = word.find(aUniEnXPath).text.lstrip("-")
+        aUniEn.text = word.find(aUniEnXPath).text.strip("-=")
         
         aUniRuXPath = "./item[@type='gls'][@lang='" + self.glang2 + "']"
         if word.find(aUniRuXPath) is not None:
             aUniRu = ET.SubElement(gloss, "AUni", attrib={"ws": self.glang2})
-            aUniRu.text = word.find(aUniRuXPath).text.lstrip("-")
+            aUniRu.text = word.find(aUniRuXPath).text.strip("-=")
 
         MSA = ET.SubElement(lexSenseRt, "MorphoSyntaxAnalysis")
         lexemeSur = ET.SubElement(MSA, "objsur", attrib={"guid": msa, "t": "r"})
@@ -336,7 +338,7 @@ class Converter:
 
             alloAffix = ET.SubElement(moAffixAllomorphRt, "Form")
             alloUniEn = ET.SubElement(alloAffix, "AUni", attrib={"ws": self.tlang})
-            alloUniEn.text = word.find("./item[@type='cf']").text.lstrip("-")
+            alloUniEn.text = word.find("./item[@type='cf']").text.strip("-=")
 
             isAbstract = ET.SubElement(moAffixAllomorphRt, "IsAbstract", attrib={"val": "False"})
 
@@ -350,7 +352,7 @@ class Converter:
 
             # MoInflAffixMsa
 
-            affMsa = word.find("./item[@type='msa']").text.lstrip("-")
+            affMsa = word.find("./item[@type='msa']").text.strip("-=")
 
             if ">" in affMsa:
                 # Then it's a derivational affix
@@ -395,7 +397,7 @@ class Converter:
                     posSur = ET.SubElement(partOfSpeech, "objsur", attrib={"guid": pos, "t": "r"})
 
                     # Checking if a morpheme slot exists
-                    slotValue = word.find("./item[@type='msa']").text.lstrip("-")
+                    slotValue = word.find("./item[@type='msa']").text.strip("-=")
                     slotExists = self.checkSlot(self, slotValue, pos)
 
                     if slotExists:
@@ -427,14 +429,13 @@ class Converter:
         astr = ET.SubElement(form, "AStr")
         morphString = ET.SubElement(astr, "Run", attrib={"ws": self.tlang})
         try:
-            # TODO any particular reason behind lstrip?
-            morphString.text = bundle.find("./item[@type='cf']").text.lstrip("-")
+            morphString.text = bundle.find("./item[@type='cf']").text.strip("-=")
         except:
             pass
 
         try:
             morphGlossEnXPath = "./item[@type='gls'][@lang='" + self.glang1 + "']"
-            morphGlossEn = bundle.find(morphGlossEnXPath).text.lstrip("-")
+            morphGlossEn = bundle.find(morphGlossEnXPath).text.strip("-=")
         except:
             print("WARNING: No " + self.glang1 + " gloss found")
             print(ET.tostring(bundle))
@@ -442,7 +443,7 @@ class Converter:
 
         try:
             morphGlossRuXPath = "./item[@type='gls'][@lang='" + self.glang2 + "']"
-            morphGlossRu = bundle.find(morphGlossRuXPath).text.lstrip("-")
+            morphGlossRu = bundle.find(morphGlossRuXPath).text.strip("-=")
         except:
             print("WARNING: No " + self.glang2 + " gloss found")
             print(ET.tostring(bundle))
@@ -520,10 +521,31 @@ class Converter:
         wfiAnalysisRt = ET.Element("rt", attrib={"class": "WfiAnalysis", "guid": guid, "ownerguid": wordformguid})
 
         category = ET.SubElement(wfiAnalysisRt, "Category")
-        try:
-            catValue = word.find(".//morphemes/morph/item[@type='msa']").text.strip("-=")
-        except:
-            catValue = None # When there is no msa
+
+        catValue = None # Default case for when there is no msa
+
+        # How to determine part of speech of a word?
+        # 1. Find a stem morph - i.e., the one without hypnens at either end
+        # 2. Use the PoS value of that morph (type='msa' in flextext)
+        # 3. If there are several stem morphs, take the first one (TODO? what if there are alternatives?)
+        # 4. If there are no stem morphs, treat the first on as a stem (TODO? check for this in flextext?)
+        #
+        # NB: Important for the correct display of inflectional affixes
+
+        noStemMorphs = True
+        msaValues = word.findall(".//morphemes/morph/item[@type='msa']")
+        if len(msaValues) > 0:
+            for mv in range(len(msaValues)):
+                if msaValues[mv].text is not None:
+                    if re.search(r'^[-=].*|.*[-=]$', msaValues[mv].text):
+                        continue
+                    else:
+                        catValue = msaValues[mv].text
+                        noStemMorphs = False
+                        break
+            if noStemMorphs:
+                catValue = msaValues[0].text.strip("-=")
+
         catGuid = None # Handling unknown POSs
         for i in self.posData:
             if i["pos"] == catValue:
@@ -555,7 +577,7 @@ class Converter:
 
             # Calling makeMorphBundle
             mmb = self.makeMorphBundle(self, bundleGuid, guid, bundle, catGuid) #returns senseGuid
-            senses4WfiData.append({'Morph-GUID': bundleGuid, 'Morph': bundle.find("./item[@type='cf']").text.lstrip("-"), 'Sense-GUID': mmb[0]})
+            senses4WfiData.append({'Morph-GUID': bundleGuid, 'Morph': bundle.find("./item[@type='cf']").text.strip("-="), 'Sense-GUID': mmb[0]})
 
             if mmb[1]:
                 meanings = ET.SubElement(wfiAnalysisRt, "Meanings")

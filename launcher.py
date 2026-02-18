@@ -23,6 +23,7 @@ def on_closing():
 
 class MainWindow(tk.Frame):
     def __init__(self, root):
+        self.stop_task = False
         super().__init__(root)
         self.root = root
         self.fwdata = None
@@ -117,8 +118,14 @@ class MainWindow(tk.Frame):
         self.existing_fwdata_label = ttk.Label(self.frameFunctions, text='My .fwdata has already been parsed:', style="BW.TLabel", font=("Georgia", 12))
         self.existing_fwdata_label.place(relx=0.02, rely=0.8)
         
-        self.existing_fwdata = ttk.Checkbutton(self.frameFunctions, style="TCheckbutton", command=self.fwdata_exists)
-        self.existing_fwdata.state(['!alternate']) 
+        self.existing_fwdata_var = tk.BooleanVar(value=False)
+
+        self.existing_fwdata = ttk.Checkbutton(
+                self.frameFunctions,
+                variable=self.existing_fwdata_var,
+                style="TCheckbutton",
+        command=self.fwdata_exists
+        )
         self.existing_fwdata.place(relx=0.65, rely=0.8)
         
         self.parse_button = ttk.Button(self.frameButtons, text="Start conversion", command=self.start_parser,
@@ -127,11 +134,14 @@ class MainWindow(tk.Frame):
         #                                 style="C.TButton").place(relx=0.65, rely=0.03, height=30)
 
     def fwdata_selection(self):
-        self.fwdata = tkfd.askopenfile(mode='r', title="Select FW Data File",
+        file = tkfd.askopenfile(mode='r', title="Select FW Data File",
                                        filetypes=[("FLEx interlinear", ".fwdata")])
-        if self.fwdata:
-            self.fwdataname.set(os.path.basename(self.fwdata.name))
-            self.selectfwdata.place_forget()  # Remove the "Select..." button
+        if not file:
+            return
+        self.fwdata = file
+        self.fwdataname.set(os.path.basename(self.fwdata.name))
+        self.selectfwdata.place_forget()  # Remove the "Select..." button
+        if not hasattr(self, "changefwdata"): 
             self.changefwdata = ttk.Button(self.frameFunctions, text="Change", command=self.fwdata_selection,
                                            style="C.TButton")
             self.changefwdata.place(relx=0.65, rely=0.6, height=30)
@@ -143,12 +153,14 @@ class MainWindow(tk.Frame):
             self.existing_fwdata.place(relx=0.65, rely=0.9)
 
 
-
-    def flextext_selection(self):
-        self.flextext = tkfd.askdirectory(title="Select FlexText Folder")
-        if self.flextext:
-            self.flexname.set(os.path.basename(self.flextext))
-            self.selectflexbutton.place_forget()  # Remove the "Select..." button
+    def flextext_selection(self):    
+        folder = tkfd.askdirectory(title="Select FlexText Folder")
+        if not folder:
+            return
+        self.flextext = folder
+        self.flexname.set(os.path.basename(self.flextext))
+        self.selectflexbutton.place_forget()  # Remove the "Select..." button
+        if not hasattr(self, "changeflexbutton"):
             self.changeflexbutton = ttk.Button(self.frameFunctions, text="Change", command=self.flextext_selection,
                                                style="C.TButton")
             self.changeflexbutton.place(relx=0.65, rely=0.8, height=30)
@@ -157,7 +169,12 @@ class MainWindow(tk.Frame):
             
     def fwdata_exists(self):
         if self.existing_fwdata.instate(['selected']):
-             self.parse_button = ttk.Button(self.frameButtons, text="Start conversion", command=self.start_converter,
+            self.existing_fwdata_var == True
+            self.parse_button = ttk.Button(self.frameButtons, text="Start conversion", command=self.start_converter,
+                                       style="C.TButton").place(relx=0.02, rely=0.03, height=30)
+        else:
+            self.existing_fwdata_var == False
+            self.parse_button = ttk.Button(self.frameButtons, text="Start conversion", command=self.start_parser,
                                        style="C.TButton").place(relx=0.02, rely=0.03, height=30)
     
     def value_check(self):
@@ -187,6 +204,7 @@ class MainWindow(tk.Frame):
         if not self.flextext_chosen():
             return
         if self.existing_fwdata.instate(['selected']):
+            self.existing_fwdata_var == True
             if not self.value_check():
                 return
         else:
@@ -228,7 +246,7 @@ class MainWindow(tk.Frame):
 
     def show_progress(self, title, task_func, task_name = None):
         
-        # self.stop_task = False
+        self.stop_task = False
         progress_window = Toplevel(self.root, bg="#F9F3F2")
         progress_window.title(title)
         progress_window.geometry("400x100")
@@ -244,13 +262,13 @@ class MainWindow(tk.Frame):
         output_label = ttk.Label(progress_window)  # , height=4, wrap='word')
         output_label.pack(pady=10)
 
-        # progress_window.protocol("WM_DELETE_WINDOW", lambda: self.stop_task_execution(progress_window))
+        progress_window.protocol("WM_DELETE_WINDOW", lambda: self.stop_task_execution(progress_window))
         thread = threading.Thread(target=self.run_task, args=(task_func, title, progress_window, progress_bar, task_name),
                                   daemon=True)
         thread.start()
 
     def stop_task_execution(self, progress_window):
-        # self.stop_task = True
+        self.stop_task = True
         progress_window.destroy()
         # self.run_task(task_func, title, progress_window, progress_bar)
 
@@ -264,37 +282,61 @@ class MainWindow(tk.Frame):
         root.update_idletasks()
 
     def run_task(self, task_func, title, progress_window, progress_bar, task_name):
-        progress_window.title(title)
-        global run_status
-        run_status = task_func()
+        try:
+            if self.stop_task:
+                return
+            run_status = task_func()
+            if self.stop_task:
+                return
+        except Exception as e:
+            error_time = re.sub(r'[ \.\:]', "-", str(datetime.now()))
+            errorlogfile = "error-" + error_time + ".log"
+            with open(errorlogfile, "w") as logfile:
+                traceback.print_exception(type(e), e, e.__traceback__, file=logfile)
+            run_status = errorlogfile
+        if self.stop_task:
+            return
+        self.root.after(
+            0,
+        lambda: self._handle_task_result(
+            run_status, title, progress_window, progress_bar, task_name
+        )
+    )
+        
+    def _handle_task_result(self, run_status, title, progress_window, progress_bar, task_name):
+
         if run_status is None and task_name == "parser":
-            result_text =  "Parser succeeded — starting converter."
-            self.start_converter()           
+            #result_text =  "Parser succeeded — starting converter."
+            #messagebox.showinfo(title="Flextext2FLEx", message=result_text)
+            progress_bar.stop()
+            progress_window.destroy()
+            self.start_converter()
+            return
+
         elif run_status is not None:
             if self.pos_not_found != "":
-                result_text = f"Parts of speech {self.pos_not_found} were not found in the target FLEx project!\nAdd them to the project and start again.\nMore information in the logfile at:\n{run_status}"
+                result_text = (
+                f"Parts of speech {self.pos_not_found} were not found in the target FLEx project!\n"
+                f"Add them to the project and start again.\n"
+                f"More information in the logfile at:\n{run_status}"
+            )
             else:
-                result_text = f"{title} has crashed and burned!\nCheck the logfile at:\n{run_status}"
-        elif run_status is None and task_name == "converter":
+                result_text = (
+                    f"{title} has crashed and burned!\n"
+                    f"Check the logfile at:\n{run_status}"
+                )
+        else:
             result_text = f"{title} is complete!"
-        self.show_result(progress_bar, progress_window, result_text)
-        #else:
-        #    #result_text = f"{title} is complete!"
-        #    print(run_status, task_name)
-            #self.show_result(progress_bar, progress_window, result_text)
-           
 
-        
-
-        # self.root.after(5000, result_window.destroy)
-
-    def show_result(self, progress_bar, progress_window, result_text):
         progress_bar.stop()
         progress_window.destroy()
+
         if run_status is not None:
             messagebox.showerror(title="Flextext2FLEx", message=result_text)
         else:
             messagebox.showinfo(title="Flextext2FLEx", message=result_text)
+    
+    
 
     def open_documentation_window(self):
         if self.documentation_window and tk.Toplevel.winfo_exists(self.documentation_window):
@@ -377,15 +419,18 @@ class MainWindow(tk.Frame):
         
         self.precheck_button = ttk.Button(self.precheck_frame, text="Check my flextexts!", command=self.start_precheck,
                                        style="C.TButton").place(relx=0.25, rely=0.45, height=50)
+        self.precheck_window.focus()
         
         
     def precheck_input_selection(self):
-        precheck_input = tkfd.askdirectory(title="Select your input folder")
-        if precheck_input:
-            self.precheck_input = precheck_input
-            self.input_name.set(os.path.basename(self.precheck_input))
-            
-            self.select_input.place_forget()
+        self.precheck_window.focus()
+        precheck_folder = tkfd.askdirectory(title="Select your input folder")
+        if not precheck_folder:
+            return
+        self.precheck_input = precheck_folder
+        self.input_name.set(os.path.basename(self.precheck_input))
+        self.select_input.place_forget()
+        if not hasattr(self, "change_input_button"):
             self.change_input_button = ttk.Button(
                 self.precheck_frame,
                 text="Change",
@@ -412,7 +457,7 @@ class MainWindow(tk.Frame):
                 messagebox.showinfo("Success", "No errors found!")
 
         threading.Thread(target=task, daemon=True).start()
-
+        self.precheck_window.focus()
 
         #file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "documentation.html"
         #with open(file_path, 'r') as file:
