@@ -274,10 +274,10 @@ class MainWindow(tk.Frame):
 
     def update_progress(self, label_text, step):
         sleep(0.5)
-        global progress_label
+        #global progress_label
         progress_label["text"] = label_text
 
-        global progress_bar
+        #global progress_bar
         progress_bar.step(step)
         root.update_idletasks()
 
