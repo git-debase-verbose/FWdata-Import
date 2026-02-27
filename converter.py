@@ -1,4 +1,5 @@
 from datetime import date, datetime
+import traceback
 import xml.etree.ElementTree as ET
 import uuid
 import re
@@ -97,7 +98,7 @@ class Converter:
         if unknownPOS:
             self.main_window.pos_not_found_error(str(unknownPOStags))
             #error_message = f'Pars of speech {unknownPOStags} were not found in the database. Add them to the database and try again.'
-            raise Exception(f'Pars of speech {str(unknownPOStags)} were not found in the database. Add them to the database and try again.').with_traceback(tracebackobj)
+            raise Exception(f'Pars of speech {str(unknownPOStags)} were not found in the database. Add them to the database and try again.').with_traceback(traceback)
 
 
     def createGUID(self):
