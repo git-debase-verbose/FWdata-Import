@@ -87,7 +87,7 @@ class Converter:
             for POS in allPOStags:
                 if POS.text is not None:
                     # Check the stem POS only
-                    if not re.search(r'^[-=].*|.*[-=]$', POS.text):
+                    if not re.search(r'^[-].*|.*[-]$', POS.text):
                         inflDeriv = re.search(r'^[^:>]+', POS.text)
                         mainPOS = inflDeriv.group(0) if inflDeriv else POS.text
                         if mainPOS.strip('-=') not in posTagsFWdata:
@@ -289,8 +289,14 @@ class Converter:
         txtCheck = word.find(txtCheckXPath).text
 
         if not txtCheck.startswith("-") and not txtCheck.endswith("-"):
-            # Then it's a stem
-            morphType = "stem"
+            # Then it's a stem or a clitic
+            if txtCheck.startswith("="):
+                morphType = "enclitic"
+            elif txtCheck.endswith("="):
+                morphType = "prolitic"
+            else:
+                morphType = "stem"
+            
 
             # MoStemMsa
 
@@ -308,7 +314,7 @@ class Converter:
 
             alloStem = ET.SubElement(moStemAllomorphRt, "Form")
             alloUniEn = ET.SubElement(alloStem, "AUni", attrib={"ws": self.tlang})
-            alloUniEn.text = word.find("./item[@type='cf']").text
+            alloUniEn.text = word.find("./item[@type='cf']").text.strip("=")
 
             isAbstract = ET.SubElement(moStemAllomorphRt, "IsAbstract", attrib={"val": "False"})
 
